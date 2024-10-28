@@ -34,7 +34,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 3. Storing API keys
+### 3. Storing API keys and other secret keys
 To securely store your API keys and other sensitive information, you should create a `.env` file. 
 Follow these steps:
 
@@ -44,5 +44,27 @@ touch .env
 ```
 ```bash
 #Open the `.env` file in your favorite text editor and add your API keys in the following format:
-GROQ_API_KEY=<your-api-key-here>
+API_KEY=<your-api-key-here>
 ```
+Cover the following in your .env file: DB_USER, DB_PASS, DB_NAME, INSTANCE_CONNECTION_NAME, GOOGLE_APPLICATION_CREDENTIALS, GCS_BUCKET_NAME
+
+
+### 4. Generating a GCP JSON Connection File
+To generate a JSON connection file for Google Cloud Platform (GCP), follow these steps:
+1. **Access Credentials**:
+   - Navigate to **Credentials** in the Google Cloud Console.
+2. **Create a Service Account**:
+   - Click on **Create Credentials** and select **Service Account**.
+3. **Assign a Role**:
+   - Choose the **Viewer** role for the Service Account, then click **Done**.
+4. **Generate JSON Key**:
+   - Locate your newly created Service Account.
+   - Click on **Keys**.
+   - Select **Add Key**, then choose **JSON**.
+   - Save the generated JSON file securely.
+5. **Store the JSON File**:
+   - Place the JSON file in the main directory of your project.
+
+
+
+
