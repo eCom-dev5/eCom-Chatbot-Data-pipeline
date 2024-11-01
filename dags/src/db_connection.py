@@ -32,4 +32,3 @@ def connect_with_db() -> sqlalchemy.engine.base.Engine:
     return pool
 
 
-connect_with_db()

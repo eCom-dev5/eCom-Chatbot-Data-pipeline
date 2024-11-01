@@ -5,3 +5,4 @@ python-dotenv
 pandas
 google-cloud-storage
 Flask
+apache-airflow
