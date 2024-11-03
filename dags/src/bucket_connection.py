@@ -1,5 +1,3 @@
-# to connect to the bucket
-
 import os
 from google.cloud import storage
 from dotenv import load_dotenv
@@ -28,3 +26,5 @@ def list_blobs():
     print("Blobs in the bucket:")
     for blob in blobs:
         print(blob.name)
+
+

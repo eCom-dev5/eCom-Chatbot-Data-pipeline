@@ -4,9 +4,10 @@ from datetime import datetime
 from google.cloud import storage
 from dotenv import load_dotenv
 from sqlalchemy import text
+import subprocess
 
 from src.db_connection import *
-import time
+
 
 load_dotenv()
 
@@ -33,41 +34,47 @@ def create_table_meta_data():
             message = f"Error during insert: {e}"
 
 
+
 def add_meta_data():
-    time.sleep(13)
+    bucket_name = "mlops_data_pipeline/Data/Raw_CSV/TEST"
+    file_name = 'test_metadata.csv'
+    postgres_conn_string = os.getenv("postgres_conn_string")
+    table_name = 'metadata'
+    transfer_command = f"""
+    yes | gcloud sql import csv data-wharehousing \
+    gs://{bucket_name}/{file_name} \
+    --project=dockdecoder \
+    --database=postgres \
+    --table={table_name}
+    """
+
+    try:
+        # Run the command
+        result = subprocess.run(transfer_command, shell=True, check=True, capture_output=True, text=True)
+        print("Import successful:", result.stdout)
+    except subprocess.CalledProcessError as e:
+        print("Error during import:", e.stderr)
 
 
-def add_user_reviews():
-    time.sleep(14)
+def add_review_data():
+    bucket_name = "mlops_data_pipeline/Data/Raw_CSV/TEST"
+    file_name = 'test_user_reviews.csv'
+    postgres_conn_string = os.getenv("postgres_conn_string")
+    table_name = 'user_reviews'
+    transfer_command = f"""
+    yes | gcloud sql import csv data-wharehousing \
+    gs://{bucket_name}/{file_name} \
+    --project=dockdecoder \
+    --database=postgres \
+    --table={table_name}
+    """
 
-
-# def csv_to_DB_user_review(bucket_name:str, file_name: str):
-#     table_name = "user_reviews_test"
-#     postgres_conn_string = os.getenv("postgres_conn_string")
-#     instance_name = os.getenv("INSTANCE_CONNECTION_NAME")
-#     database_name = os.getenv("DB_NAME")
-    
-
-
-#     transfer_command = f"""
-#     gcloud sql import csv postgres gs://{bucket_name}/{file_name} \
-#     --database={database_name} \
-#     --table={table_name}
-#     """
-#     return transfer_command
-
-
-# transfer_command = csv_to_DB_user_review('Data/Raw_CSV/TEST/','TEST.csv')
-# print(transfer_command)
-    
-
-    
-
-
-
-
-
-    
+    try:
+        # Run the command
+        result = subprocess.run(transfer_command, shell=True, check=True, capture_output=True, text=True)
+        print("Import successful:", result.stdout)
+    except subprocess.CalledProcessError as e:
+        print("Error during import:", e.stderr)
 
 
 

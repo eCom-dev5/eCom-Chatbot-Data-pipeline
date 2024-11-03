@@ -62,6 +62,7 @@ x-airflow-common:
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session'
+    # PATH: /opt/airflow/google-cloud-sdk/bin
     # yamllint disable rule:line-length
     # Use simple http server on scheduler for health checks
     # See https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/check-health.html#scheduler-health-check-server
@@ -80,6 +81,7 @@ x-airflow-common:
     - ${AIRFLOW_PROJ_DIR:-.}/config:/opt/airflow/config
     - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
     - ${AIRFLOW_PROJ_DIR:-.}/.env:/opt/airflow/.env
+    - ${AIRFLOW_PROJ_DIR:-.}/google-cloud-sdk:/opt/airflow/google-cloud-sdk
     - ${AIRFLOW_PROJ_DIR:-.}/dockdecoder-03cb7054df7e.json:/opt/airflow/dockdecoder-03cb7054df7e.json
     
   user: "${AIRFLOW_UID:-50000}:0"
