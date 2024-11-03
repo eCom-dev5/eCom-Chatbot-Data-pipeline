@@ -129,18 +129,8 @@ gcloud auth list
    Follow the installation instructions specific to your OS.
    - Windows: Run the installer and follow the prompts. Make sure to enable Windows Subsystem for Linux (WSL) if prompted.
    - Mac: Open the downloaded .dmg file, drag Docker to your Applications folder, and launch it.
-   - Linux: Install Docker Engine by following these commands:
-```bash
-sudo apt-get update
-sudo apt-get install -y ca-certificates curl gnupg
-sudo mkdir -p /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-```   
+   - Linux: Install Docker Engine by using commands specified in the Docker website.
+  
 3. Verify Installation:
    Run the following command to check if Docker is installed correctly:
 ```bash
