@@ -103,7 +103,7 @@ gcloud init
 gcloud auth activate-service-account --key-file=<path-to-your-service-account-key>.json
 ```
 4. Set Environment Variables:
-   - Define environment variables to streamline interaction with Google Cloud. For example:
+   - Define environment variables to streamline interaction with Google Cloud.
 ```bash
 export GOOGLE_CLOUD_PROJECT=<your-project-id>
 export GOOGLE_APPLICATION_CREDENTIALS="<path-to-your-service-account-key>.json"
@@ -123,7 +123,30 @@ gcloud auth list
 
 
 ### 6. Set Up Docker
-
+1. Download Docker:
+   Go to the Docker website. Choose the appropriate Docker Desktop version for your operating system (Windows, Mac, or Linux).
+2. Install Docker.
+   Follow the installation instructions specific to your OS.
+   - Windows: Run the installer and follow the prompts. Make sure to enable Windows Subsystem for Linux (WSL) if prompted.
+   - Mac: Open the downloaded .dmg file, drag Docker to your Applications folder, and launch it.
+   - Linux: Install Docker Engine by following these commands:
+```bash
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl gnupg
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+```   
+3. Verify Installation:
+   Run the following command to check if Docker is installed correctly:
+```bash
+docker --version
+```
+  
 ### 7. Running Docker and Initializing Airflow
 Once Docker is installed, follow these steps to set up and start Airflow with Docker Compose.
 1. Start Docker Compose Services
