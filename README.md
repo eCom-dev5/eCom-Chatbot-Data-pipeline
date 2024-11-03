@@ -109,7 +109,7 @@ export GOOGLE_CLOUD_PROJECT=<your-project-id>
 export GOOGLE_APPLICATION_CREDENTIALS="<path-to-your-service-account-key>.json"
 ```
 5. Enable Required APIs
-   Enable Compute Engine, Cloud-SQL and Cloud SQL Admin APIs
+   - Enable Compute Engine, Cloud-SQL and Cloud SQL Admin APIs
 ```bash
 gcloud services enable <API_NAME>
 ```
