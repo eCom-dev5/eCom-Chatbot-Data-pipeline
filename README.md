@@ -120,6 +120,7 @@ gcloud --version
 gcloud config list
 gcloud auth list
 ```
+After setting up google SDK, update the google SDK path in docker-compose.yaml
 
 
 ### 7. Set Up Docker
