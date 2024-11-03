@@ -122,7 +122,7 @@ gcloud auth list
 ```
 
 
-### 6. Set Up Docker
+### 7. Set Up Docker
 1. Download Docker:
    Go to the Docker website. Choose the appropriate Docker Desktop version for your operating system (Windows, Mac, or Linux).
 2. Install Docker.
@@ -147,7 +147,7 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 docker --version
 ```
   
-### 7. Running Docker and Initializing Airflow
+### 8. Running Docker and Initializing Airflow
 Once Docker is installed, follow these steps to set up and start Airflow with Docker Compose.
 1. Start Docker Compose Services
    Run the following command to bring up all services defined in the `docker-compose.yml` file in detached mode (running in the background):
