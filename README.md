@@ -80,6 +80,48 @@ To generate a JSON connection file for Google Cloud Platform (GCP), follow these
 5. Store the JSON File:
    - Place the JSON file in the main directory of your project.
 
+### 6. Steps for Setting Up Google Cloud SDK in Your Environment
+1. Install Google Cloud SDK:
+   - Download the SDK based on your operating system:
+   - Linux: Use the curl command.
+   - Mac: Use curl or brew if you have Homebrew installed.
+   - Windows: Download the installer from the Google Cloud website.
+```bash
+# For Linux/MacOS
+curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-<VERSION>-<OS>.tar.gz
+tar -xf google-cloud-sdk-<VERSION>-<OS>.tar.gz
+./google-cloud-sdk/install.sh
+```
+2. Initialize the SDK:
+```bash
+gcloud init
+```
+3. Authenticate Google Cloud SDK:
+   - Set up a service account and download its JSON key file.
+   - Use the following command to authenticate with this key:
+```bash
+gcloud auth activate-service-account --key-file=<path-to-your-service-account-key>.json
+```
+4. Set Environment Variables:
+   - Define environment variables to streamline interaction with Google Cloud. For example:
+```bash
+export GOOGLE_CLOUD_PROJECT=<your-project-id>
+export GOOGLE_APPLICATION_CREDENTIALS="<path-to-your-service-account-key>.json"
+```
+5. Enable Required APIs
+   Enable Compute Engine, Cloud-SQL and Cloud SQL Admin APIs
+```bash
+gcloud services enable <API_NAME>
+```
+6. Verify Installation:
+   - Run a few commands to confirm that the SDK is set up correctly:
+```bash
+gcloud --version
+gcloud config list
+gcloud auth list
+```
+
+
 ### 6. Set Up Docker
 
 ### 7. Running Docker and Initializing Airflow
