@@ -80,9 +80,65 @@ To generate a JSON connection file for Google Cloud Platform (GCP), follow these
 5. Store the JSON File:
    - Place the JSON file in the main directory of your project.
 
-### 6. Set Up Docker
+### 6. Steps for Setting Up Google Cloud SDK in Your Environment
+1. Install Google Cloud SDK:
+   - Download the SDK based on your operating system:
+   - Linux: Use the curl command.
+   - Mac: Use curl or brew if you have Homebrew installed.
+   - Windows: Download the installer from the Google Cloud website.
+```bash
+# For Linux/MacOS
+curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-<VERSION>-<OS>.tar.gz
+tar -xf google-cloud-sdk-<VERSION>-<OS>.tar.gz
+./google-cloud-sdk/install.sh
+```
+2. Initialize the SDK:
+```bash
+gcloud init
+```
+3. Authenticate Google Cloud SDK:
+   - Set up a service account and download its JSON key file.
+   - Use the following command to authenticate with this key:
+```bash
+gcloud auth activate-service-account --key-file=<path-to-your-service-account-key>.json
+```
+4. Set Environment Variables:
+   - Define environment variables to streamline interaction with Google Cloud.
+```bash
+export GOOGLE_CLOUD_PROJECT=<your-project-id>
+export GOOGLE_APPLICATION_CREDENTIALS="<path-to-your-service-account-key>.json"
+```
+5. Enable Required APIs
+   - Enable Compute Engine, Cloud-SQL and Cloud SQL Admin APIs
+```bash
+gcloud services enable <API_NAME>
+```
+6. Verify Installation:
+   - Run a few commands to confirm that the SDK is set up correctly:
+```bash
+gcloud --version
+gcloud config list
+gcloud auth list
+```
+After setting up google SDK, update the google SDK path in docker-compose.yaml
 
-### 7. Running Docker and Initializing Airflow
+
+### 7. Set Up Docker
+1. Download Docker:
+   Go to the Docker website. Choose the appropriate Docker Desktop version for your operating system (Windows, Mac, or Linux).
+2. Install Docker.
+   Follow the installation instructions specific to your OS.
+   - Windows: Run the installer and follow the prompts. Make sure to enable Windows Subsystem for Linux (WSL) if prompted.
+   - Mac: Open the downloaded .dmg file, drag Docker to your Applications folder, and launch it.
+   - Linux: Install Docker Engine by using commands specified in the Docker website.
+  
+3. Verify Installation:
+   Run the following command to check if Docker is installed correctly:
+```bash
+docker --version
+```
+  
+### 8. Running Docker and Initializing Airflow
 Once Docker is installed, follow these steps to set up and start Airflow with Docker Compose.
 1. Start Docker Compose Services
    Run the following command to bring up all services defined in the `docker-compose.yml` file in detached mode (running in the background):
@@ -121,13 +177,72 @@ This command brings up all services defined in docker-compose.yml in the foregro
 http://0.0.0.0:8080/
    ```
 
+## Dataset Information
+### 1. About Dataset
+The dataset we will be working with consists of reviews and metadata for video games and toys, sourced from a comprehensive collection of Amazon product reviews data that are recorded from May 1996 to September 2023. This data will help improve our eCommerce chatbot by giving it better insights into customer opinions and preferences, allowing it to answer questions with more relevant, context-specific information.
+
+### 2. Data Card
+We utilize two types of datasets;
+
+**User Reviews Dataset**
+| Feature Name       | Feature Data Type | Feature Description                          |
+|--------------------|-------------------|----------------------------------------------|
+| `rating`           | Float            | Rating of the product                        |
+| `title`            | String           | Title of the user review                     |
+| `text`             | String           | Text body of the user review                 |
+| `images`           | List             | Images posted by user after they receive the product |
+| `asin`             | String           | ID of the product                            |
+| `parent_asin`      | String           | Parent ID of the product                     |
+| `user_id`          | String           | ID of the reviewer                           |
+| `timestamp`        | Integer          | Time of the review                           |
+| `verified_purchase`| Boolean          | User purchase verification                   |
+| `helpful_vote`     | Integer          | Helpful votes of the review                  |
+
+**Product Metadata Dataset**
+| Feature Name       | Feature Data Type | Feature Description                                           |
+|--------------------|-------------------|----------------------------------------------------------------|
+| `main_category`    | String            | Domain of the product                                          |
+| `title`            | String            | Name of the product                                            |
+| `average_rating`   | Float             | Rating of the product shown on the product page                |
+| `rating_number`    | Integer           | Number of ratings for the product                              |
+| `features`         | List              | Bullet-point format features of the product                    |
+| `description`      | List              | Description of the product                                     |
+| `price`            | Float             | Price in US dollars                                            |
+| `images`           | List              | Images of the product                                          |
+| `videos`           | List              | Videos of the product, including title and URL                 |
+| `store`            | String            | Store name of the product                                      |
+| `categories`       | List              | Hierarchical categories of the product                         |
+| `details`          | Dictionary        | Product details, including materials, brand, sizes, etc.       |
+| `parent_asin`      | String            | Parent ID of the product                                       |
+| `bought_together`  | List              | Recommended bundles from the website                           |
+
+### 3. Data Source
+This dataset is taken from [UCSD - Amazon Product Reviews](https://cseweb.ucsd.edu/~jmcauley/datasets.html#amazon_reviews).
+
+We employed Apache Airflow to modularized our data pipeline.
 
 
-
-     
-
-
+![DAG picture](./assets/pipeline.png)
+![Airflow picture](./assets/airflow-pipeline2.png)
 
 
+### 4. Data Pipeline Components
+
+**download_data.py:** This code downloads the data from a specified URL, extract the contents and uploads the extracted file to a cloud storage bucket.
+
+**bucket_connection.py:** This module is responsible for establishes a connection to the Google Cloud Storage bucket using environment variables. 
+
+**json_to_csv.py:** This module downloads the JSON file from the cloud storage bucket, converts the JSON data to CSV format using pandas and uploads the CSV back to cloud storage.
+
+**db_connection.py:** This module is essential for establishing a secure connection to a Google Cloud SQL database using the necessary configurations.
+
+**CSV_to_DB.py:** It is responsible for creating the user review and metadata tables and uses Google Cloud CLI to import metadata CSV from GCS into the PostgreSQL tables.
+
+**db_to_schema.py:** This module is responsible for cleaning the metadata table by removing invalid image URLs and splits metadata and user review tables into four different table.
+
+We create an interactive Tableau dashboard that can be viewed from [here.](https://public.tableau.com/views/ecom_17305714910920/Dashboard1?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link) 
 
 
+## Folder Structure
+
+![Folder Structure picture](./assets/folder_struct.png)
