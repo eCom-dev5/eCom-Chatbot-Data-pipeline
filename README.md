@@ -222,7 +222,7 @@ This dataset is sourced from [UCSD - Amazon Product Reviews](https://cseweb.ucsd
 We employed Apache Airflow to modularized our data pipeline.
 
 
-![DAG picture](./assets/pipline.png)
+![DAG picture](./assets/pipeline.png)
 
 
 
