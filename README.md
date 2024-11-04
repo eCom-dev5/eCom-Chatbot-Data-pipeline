@@ -217,7 +217,7 @@ We utilize two types of datasets;
 | `bought_together`  | List              | Recommended bundles from the website                           |
 
 ### 3. Data Source
-This dataset is taken from [UCSD - Amazon Product Reviews]([https://pages.github.com/](https://cseweb.ucsd.edu/~jmcauley/datasets.html#amazon_reviews)).
+This dataset is sourced from [UCSD - Amazon Product Reviews](https://cseweb.ucsd.edu/~jmcauley/datasets.html#amazon_reviews).
 
 We utilized Apache Airflow to modularized our data pipeline.
 
