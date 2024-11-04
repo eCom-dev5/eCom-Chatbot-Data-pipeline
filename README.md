@@ -238,7 +238,10 @@ We employed Apache Airflow to modularized our data pipeline.
 
 **db_to_schema.py:** This module is responsible for cleaning the metadata table by removing invalid image URLs and splits metadata and user review tables into four different table.
 
+We create an interactive Tableau dashboard that can be viewed from [here](https://public.tableau.com/views/ecom_17305714910920/Dashboard1?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link) 
 
 
+## Folder Structure
+├── Data │ ├── temp │ ├── temp1 │ ├── temp2 │ ├── test │ │ ├── metadata.csv │ │ ├── metadata.json │ │ ├── user_reviews.csv │ │ ├── user_reviews.json │ │ └── user_reviews.sql ├── Dockerfile ├── config ├── dags │ ├── pycache │ │ └── airflow.cpython-312.pyc │ ├── airflow.py │ └── src │ ├── CSV_to_DB.py │ ├── pycache │ ├── bucket_connection.py │ ├── db_connection.py │ ├── db_to_schema.py │ ├── download_data.py │ └── json_to_csv.py ├── dockdecoder-03cb7054df7e.json ├── docker-compose.yaml ├── google-cloud-sdk │ └── mapping ├── logs │ ├── dag_id=data_pipeline │ ├── dag_processor_manager │ │ └── dag_processor_manager.log │ └── scheduler │ ├── 2024-10-29 │ ├── 2024-10-30 │ ├── 2024-11-01 │ ├── 2024-11-02 │ ├── 2024-11-03 │ └── latest -> 2024-11-03 ├── plugins ├── requirements.txt └── venv ├── bin │ ├── activate
 
 
