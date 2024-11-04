@@ -178,10 +178,48 @@ http://0.0.0.0:8080/
    ```
 
 ## Dataset Information
+### 1. About Dataset
+The dataset we will be working with consists of reviews and metadata for video games and toys, sourced from a comprehensive collection of Amazon product reviews data that are recorded from May 1996 to September 2023. This data will help improve our eCommerce chatbot by giving it better insights into customer opinions and preferences, allowing it to answer questions with more relevant, context-specific information.
 
+### 2. Data Card
+We utilize two types of datasets;
 
+**User Reviews Dataset**
+| Feature Name       | Feature Data Type | Feature Description                          |
+|--------------------|-------------------|----------------------------------------------|
+| `rating`           | Float            | Rating of the product                        |
+| `title`            | String           | Title of the user review                     |
+| `text`             | String           | Text body of the user review                 |
+| `images`           | List             | Images posted by user after they receive the product |
+| `asin`             | String           | ID of the product                            |
+| `parent_asin`      | String           | Parent ID of the product                     |
+| `user_id`          | String           | ID of the reviewer                           |
+| `timestamp`        | Integer          | Time of the review                           |
+| `verified_purchase`| Boolean          | User purchase verification                   |
+| `helpful_vote`     | Integer          | Helpful votes of the review                  |
 
+**Product Metadata Dataset**
+| Feature Name       | Feature Data Type | Feature Description                                           |
+|--------------------|-------------------|----------------------------------------------------------------|
+| `main_category`    | String            | Domain of the product                                          |
+| `title`            | String            | Name of the product                                            |
+| `average_rating`   | Float             | Rating of the product shown on the product page                |
+| `rating_number`    | Integer           | Number of ratings for the product                              |
+| `features`         | List              | Bullet-point format features of the product                    |
+| `description`      | List              | Description of the product                                     |
+| `price`            | Float             | Price in US dollars                                            |
+| `images`           | List              | Images of the product                                          |
+| `videos`           | List              | Videos of the product, including title and URL                 |
+| `store`            | String            | Store name of the product                                      |
+| `categories`       | List              | Hierarchical categories of the product                         |
+| `details`          | Dictionary        | Product details, including materials, brand, sizes, etc.       |
+| `parent_asin`      | String            | Parent ID of the product                                       |
+| `bought_together`  | List              | Recommended bundles from the website                           |
 
+### 3. Data Source
+This dataset is taken from [UCSD - Amazon Product Reviews]([https://pages.github.com/](https://cseweb.ucsd.edu/~jmcauley/datasets.html#amazon_reviews)).
+
+We utilized Apache Airflow to modularized our data pipeline.
 
      
 
