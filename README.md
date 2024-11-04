@@ -224,6 +224,16 @@ We employed Apache Airflow to modularized our data pipeline.
 
 ![DAG picture](./assets/pipeline.png)
 
+### 4. Data Pipeline Components
+
+**download_data.py:** This code downloads the data from a specified URL, extract the contents and uploads the extracted file to a cloud storage bucket.
+**bucket_connection.py:** This module is responsible for establishes a connection to the Google Cloud Storage bucket using environment variables. 
+**json_to_csv.py:** This module downloads the JSON file from the cloud storage bucket, converts the JSON data to CSV format using pandas and uploads the CSV back to cloud storage.
+**db_connection.py:** This module is essential for establishing a secure connection to a Google Cloud SQL database using the necessary configurations.
+**CSV_to_DB.py:** It is responsible for creating the user review and metadata tables and uses Google Cloud CLI to import metadata CSV from GCS into the PostgreSQL tables.
+**db_to_schema.py:** This module is responsible for cleaning the metadata table by removing invalid image URLs and splits metadata and user review tables into four different table.
+
+
 
 
 
