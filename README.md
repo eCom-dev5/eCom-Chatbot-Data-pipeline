@@ -219,11 +219,10 @@ We utilize two types of datasets;
 ### 3. Data Source
 This dataset is sourced from [UCSD - Amazon Product Reviews](https://cseweb.ucsd.edu/~jmcauley/datasets.html#amazon_reviews).
 
-We utilized Apache Airflow to modularized our data pipeline.
-
-     
+We employed Apache Airflow to modularized our data pipeline.
 
 
+![DAG picture](./assets/pipline.png)
 
 
 
